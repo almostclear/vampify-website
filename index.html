@@ -160,7 +160,17 @@
         transform: none;
       }
 
+      .ba-layer {
+        position: absolute;
+        inset: 0;
+      }
+
+      .ba-layer-before {
+        z-index: 0;
+      }
+
       .ba-after {
+        z-index: 1;
         clip-path: inset(0 100% 0 0);
         transition: clip-path 0.55s cubic-bezier(0.22, 1, 0.36, 1);
       }
@@ -173,6 +183,7 @@
 
       .ba-divider {
         left: 0%;
+        z-index: 3;
         transition: left 0.55s cubic-bezier(0.22, 1, 0.36, 1);
       }
 
@@ -207,9 +218,9 @@
 
       .ba-tag {
         position: absolute;
-        z-index: 2;
         bottom: 1rem;
         right: 1rem;
+        z-index: 1;
         padding: 0.35rem 0.6rem;
         background: rgba(18, 18, 18, 0.72);
         border: 1px solid var(--line);
@@ -217,6 +228,18 @@
         font-size: 0.65rem;
         letter-spacing: 0.28em;
         text-transform: uppercase;
+        pointer-events: none;
+      }
+
+      /* Keep Before label under the wipe so it never floats over After */
+      .ba-layer-before .ba-tag {
+        z-index: 0;
+      }
+
+      .ba:hover .ba-layer-before .ba-tag,
+      .ba:focus-within .ba-layer-before .ba-tag,
+      .ba.is-active .ba-layer-before .ba-tag {
+        opacity: 0;
       }
 
       .step-accent {
@@ -526,7 +549,7 @@
                 role="img"
                 aria-label="Pure Education before and after preview. Hover or focus to reveal after."
               >
-                <div class="absolute inset-0">
+                <div class="ba-layer ba-layer-before">
                   <img
                     src="assets/pe-before.png"
                     alt="Pure Education website before the refresh"
@@ -538,7 +561,7 @@
                   />
                   <span class="ba-tag text-mist">Before</span>
                 </div>
-                <div class="ba-after absolute inset-0 z-[1]">
+                <div class="ba-after ba-layer">
                   <img
                     src="assets/pe-new.png"
                     alt="Pure Education website after the refresh"
@@ -562,7 +585,7 @@
                   </div>
                 </div>
                 <div
-                  class="ba-divider absolute top-0 bottom-0 w-px bg-neon z-10 pointer-events-none"
+                  class="ba-divider absolute top-0 bottom-0 w-px bg-neon pointer-events-none"
                   aria-hidden="true"
                 ></div>
               </div>
@@ -579,7 +602,7 @@
                 aria-label="Coming soon before and after preview"
               >
                 <div
-                  class="absolute inset-0 flex items-end justify-end p-6 md:p-8"
+                  class="ba-layer ba-layer-before flex items-end justify-end p-6 md:p-8 bg-[#1E2430]"
                 >
                   <span
                     class="font-display text-[0.65rem] tracking-widest2 uppercase text-mist"
@@ -587,7 +610,7 @@
                   >
                 </div>
                 <div
-                  class="ba-after absolute inset-0 z-[1] flex items-center justify-center bg-[#102018]"
+                  class="ba-after ba-layer flex items-center justify-center bg-[#102018]"
                 >
                   <div
                     class="ba-after-inner flex flex-col items-center justify-center gap-4"
@@ -606,7 +629,7 @@
                   </div>
                 </div>
                 <div
-                  class="ba-divider absolute top-0 bottom-0 w-px bg-neon z-10 pointer-events-none"
+                  class="ba-divider absolute top-0 bottom-0 w-px bg-neon pointer-events-none"
                   aria-hidden="true"
                 ></div>
               </div>
@@ -658,7 +681,7 @@
                 aria-label="Coming soon before and after preview"
               >
                 <div
-                  class="absolute inset-0 flex items-end justify-end p-6 md:p-8"
+                  class="ba-layer ba-layer-before flex items-end justify-end p-6 md:p-8 bg-[#242424]"
                 >
                   <span
                     class="font-display text-[0.65rem] tracking-widest2 uppercase text-mist"
@@ -666,7 +689,7 @@
                   >
                 </div>
                 <div
-                  class="ba-after absolute inset-0 z-[1] flex items-center justify-center bg-[#0d1a0d]"
+                  class="ba-after ba-layer flex items-center justify-center bg-[#0d1a0d]"
                 >
                   <div
                     class="ba-after-inner flex flex-col items-center justify-center gap-4"
@@ -685,7 +708,7 @@
                   </div>
                 </div>
                 <div
-                  class="ba-divider absolute top-0 bottom-0 w-px bg-neon z-10 pointer-events-none"
+                  class="ba-divider absolute top-0 bottom-0 w-px bg-neon pointer-events-none"
                   aria-hidden="true"
                 ></div>
               </div>
