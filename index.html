@@ -3,20 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VAMPIFY - We refresh websites.</title>
+    <title>VAMPIFY — Website refreshment studio</title>
     <meta
       name="description"
-      content="VAMPIFY, We are a premium website refreshment studio. We audit, redesign, and deploy modern sites to achieve maximum performance and engagement."
+      content="VAMPIFY is a premium website refreshment studio. We audit, redesign, and deploy modern sites for maximum performance and engagement."
     />
+    <link rel="canonical" href="https://vampify.co.uk/" />
+    <meta name="theme-color" content="#121212" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:site_name" content="VAMPIFY" />
     <meta property="og:title" content="VAMPIFY — We refresh websites." />
     <meta
       property="og:description"
       content="Premium website refreshment and redesign. Audited. Rebuilt. Deployed."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="assets/vampify.jpg" />
-    <link rel="icon" type="image/png" href="assets/vampify-small-transparent-light.png" />
-    <link rel="apple-touch-icon" href="assets/vampify-small-transparent-light.png" />
+    <meta property="og:url" content="https://vampify.co.uk/" />
+    <meta
+      property="og:image"
+      content="https://vampify.co.uk/assets/vampify-small.jpg"
+    />
+    <meta property="og:image:alt" content="VAMPIFY logo" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="VAMPIFY — We refresh websites." />
+    <meta
+      name="twitter:description"
+      content="Premium website refreshment and redesign. Audited. Rebuilt. Deployed."
+    />
+    <meta
+      name="twitter:image"
+      content="https://vampify.co.uk/assets/vampify-small.jpg"
+    />
+
+    <!-- Prefer solid white-background mark for Google / browser tabs -->
+    <link
+      rel="icon"
+      href="https://vampify.co.uk/assets/vampify-small.jpg"
+      type="image/jpeg"
+      sizes="48x48"
+    />
+    <link rel="icon" href="/assets/vampify-small.jpg" type="image/jpeg" />
+    <link
+      rel="apple-touch-icon"
+      href="/assets/vampify-small.jpg"
+      sizes="180x180"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "VAMPIFY",
+        "url": "https://vampify.co.uk/",
+        "logo": "https://vampify.co.uk/assets/vampify-small.jpg",
+        "image": "https://vampify.co.uk/assets/vampify-small.jpg",
+        "description": "Premium website refreshment studio. We audit, redesign, and deploy modern sites.",
+        "email": "lets.build@vampify.com",
+        "areaServed": "GB",
+        "sameAs": ["https://staging.vampify.co.uk"]
+      }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -64,6 +114,15 @@
 
       html {
         background: var(--ink);
+        scroll-padding-top: 1rem;
+        scroll-padding-bottom: 5rem;
+      }
+
+      @media (min-width: 768px) {
+        html {
+          scroll-padding-top: 6rem;
+          scroll-padding-bottom: 0;
+        }
       }
 
       body {
@@ -242,6 +301,44 @@
         opacity: 0;
       }
 
+      .ba-hint {
+        display: none;
+      }
+
+      @media (hover: none) {
+        .ba-hint {
+          display: block;
+          position: absolute;
+          top: 0.75rem;
+          left: 0.75rem;
+          z-index: 2;
+          padding: 0.35rem 0.6rem;
+          background: rgba(18, 18, 18, 0.78);
+          border: 1px solid var(--line);
+          font-family: "Urbanist", system-ui, sans-serif;
+          font-size: 0.6rem;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color: var(--neon);
+          pointer-events: none;
+        }
+
+        .ba.is-active .ba-hint {
+          opacity: 0;
+        }
+      }
+
+      /* Mobile shell: less edge frame, space for bottom nav */
+      @media (max-width: 767px) {
+        .blueprint-frame {
+          inset: 0.5rem !important;
+        }
+
+        body {
+          padding-bottom: 4.25rem;
+        }
+      }
+
       .step-accent {
         box-shadow: inset 3px 0 0 0 var(--neon);
       }
@@ -294,12 +391,13 @@
   <body class="antialiased overflow-x-hidden">
     <!-- Blueprint frame sits under the header so scroll never leaves a gap above nav -->
     <div
-      class="pointer-events-none fixed inset-3 md:inset-5 border border-line z-30"
+      class="blueprint-frame pointer-events-none fixed inset-3 md:inset-5 border border-line z-30"
       aria-hidden="true"
     ></div>
 
+    <!-- Desktop header -->
     <header
-      class="fixed top-0 left-0 right-0 z-40 bg-ink/95 backdrop-blur-sm border-b border-line"
+      class="hidden md:block fixed top-0 left-0 right-0 z-40 bg-ink/95 backdrop-blur-sm border-b border-line"
     >
       <div
         class="mx-auto max-w-7xl px-6 md:px-10 h-16 md:h-20 flex items-center justify-between"
@@ -316,69 +414,79 @@
             height="36"
             class="h-9 w-9 object-contain"
           />
-          <span class="font-display font-extrabold text-lg md:text-xl tracking-[0.14em] text-bone">
+          <span
+            class="font-display font-extrabold text-lg md:text-xl tracking-[0.14em] text-bone"
+          >
             VAMPIFY
           </span>
         </a>
 
-        <nav class="hidden md:flex items-center gap-10" aria-label="Primary">
+        <nav class="flex items-center gap-10" aria-label="Primary">
           <a
             href="#philosophy"
             class="nav-link text-sm tracking-widest2 uppercase text-mist"
-            >Philosophy</a
-          >
-          <a href="#work" class="nav-link text-sm tracking-widest2 uppercase text-mist"
-            >Work</a
-          >
-          <a
-            href="#contact"
-            class="nav-link text-sm tracking-widest2 uppercase text-mist"
-            >Contact</a
-          >
-        </nav>
-
-        <button
-          type="button"
-          id="menu-toggle"
-          class="md:hidden text-sm tracking-widest2 uppercase text-mist hover:text-neon focus-visible:outline focus-visible:outline-1 focus-visible:outline-neon"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-        >
-          Menu
-        </button>
-      </div>
-
-      <div
-        id="mobile-menu"
-        class="md:hidden border-t border-line bg-panel absolute left-0 right-0 top-full"
-      >
-        <nav class="flex flex-col px-6 py-6 gap-5" aria-label="Mobile">
-          <a
-            href="#philosophy"
-            class="mobile-link text-sm tracking-widest2 uppercase text-bone hover:text-neon"
             >Philosophy</a
           >
           <a
             href="#work"
-            class="mobile-link text-sm tracking-widest2 uppercase text-bone hover:text-neon"
+            class="nav-link text-sm tracking-widest2 uppercase text-mist"
             >Work</a
           >
           <a
             href="#contact"
-            class="mobile-link text-sm tracking-widest2 uppercase text-bone hover:text-neon"
+            class="nav-link text-sm tracking-widest2 uppercase text-mist"
             >Contact</a
           >
         </nav>
       </div>
     </header>
 
+    <!-- Mobile: brand chip only (no sticky chrome bar) -->
+    <a
+      href="#top"
+      class="md:hidden fixed top-3 left-3 z-40 flex items-center justify-center h-11 w-11 bg-ink/90 border border-line backdrop-blur-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-neon"
+      aria-label="VAMPIFY home"
+    >
+      <img
+        src="assets/vampify-small-transparent-light.png"
+        alt=""
+        width="28"
+        height="28"
+        class="h-7 w-7 object-contain"
+      />
+    </a>
+
+    <!-- Mobile bottom nav -->
+    <nav
+      class="md:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-line bg-ink/95 backdrop-blur-sm"
+      aria-label="Mobile"
+    >
+      <div class="grid grid-cols-3 h-14">
+        <a
+          href="#philosophy"
+          class="flex items-center justify-center text-[0.65rem] tracking-widest2 uppercase text-mist hover:text-neon focus-visible:outline focus-visible:outline-1 focus-visible:outline-neon"
+          >Philosophy</a
+        >
+        <a
+          href="#work"
+          class="flex items-center justify-center text-[0.65rem] tracking-widest2 uppercase text-mist hover:text-neon border-x border-line focus-visible:outline focus-visible:outline-1 focus-visible:outline-neon"
+          >Work</a
+        >
+        <a
+          href="#contact"
+          class="flex items-center justify-center text-[0.65rem] tracking-widest2 uppercase text-mist hover:text-neon focus-visible:outline focus-visible:outline-1 focus-visible:outline-neon"
+          >Contact</a
+        >
+      </div>
+    </nav>
+
     <main id="top">
       <!-- Hero -->
       <section
-        class="hero-glow min-h-[100svh] flex flex-col justify-end pb-16 md:pb-24 pt-28 md:pt-32 px-6 md:px-10 relative"
+        class="hero-glow min-h-[100svh] flex flex-col justify-end pb-20 md:pb-24 pt-20 md:pt-32 px-5 md:px-10 relative"
       >
         <div
-          class="absolute top-24 right-6 md:right-10 md:top-28 w-32 sm:w-40 md:w-48"
+          class="hidden md:block absolute top-24 right-6 md:right-10 md:top-28 w-32 sm:w-40 md:w-48"
           aria-hidden="true"
         >
           <img
@@ -392,26 +500,27 @@
 
         <div class="mx-auto max-w-7xl w-full relative">
           <p
-            class="reveal font-display text-[0.7rem] tracking-widest2 uppercase text-neon mb-5 md:mb-7"
+            class="reveal font-display text-[0.65rem] md:text-[0.7rem] tracking-widest2 uppercase text-neon mb-4 md:mb-7"
           >
             Studio · est. 2026
           </p>
           <h1
-            class="reveal font-display font-extrabold text-[clamp(2.75rem,9vw,7.5rem)] leading-[0.95] tracking-tight text-bone max-w-[11ch]"
+            class="reveal font-display font-extrabold text-[clamp(2.35rem,11vw,7.5rem)] leading-[0.95] tracking-tight text-bone max-w-[11ch]"
           >
             We refresh websites.
           </h1>
           <p
-            class="reveal mt-6 max-w-md font-editorial text-xl md:text-2xl text-mist leading-snug"
+            class="reveal mt-5 md:mt-6 max-w-md font-editorial text-lg md:text-2xl text-mist leading-snug"
           >
-            VAMPIFY aims to rebuild your digital presence to achieve maximum performance and engagement.
+            VAMPIFY aims to rebuild your digital presence to achieve maximum
+            performance and engagement.
           </p>
           <div
-            class="reveal mt-8 md:mt-12 flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10"
+            class="reveal mt-8 md:mt-12 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-10"
           >
             <a
               href="#contact"
-              class="cta inline-flex items-center justify-center px-8 py-3.5 text-sm tracking-widest2 uppercase font-semibold w-fit"
+              class="cta inline-flex items-center justify-center px-8 py-3.5 text-sm tracking-widest2 uppercase font-semibold w-full sm:w-fit"
             >
               Start a project
             </a>
@@ -511,7 +620,7 @@
             <p
               class="font-editorial text-lg md:text-xl text-mist max-w-sm leading-snug"
             >
-              Hover a frame to reveal the refresh.
+              Hover or tap a frame to reveal the refresh.
             </p>
           </div>
 
@@ -551,8 +660,9 @@
                 class="ba-media ba-frame lg:col-span-8 relative w-full overflow-hidden bg-ink"
                 tabindex="0"
                 role="img"
-                aria-label="Pure Education before and after preview. Hover or focus to reveal after."
+                aria-label="Pure Education before and after. Tap or hover to compare."
               >
+                <span class="ba-hint">Tap to compare</span>
                 <div class="ba-layer ba-layer-before">
                   <img
                     src="assets/pe-before.png"
@@ -668,7 +778,7 @@
           </p>
           <a
             href="mailto:lets.build@vampify.com"
-            class="reveal mail-link font-display font-extrabold text-[clamp(1.75rem,6vw,4.5rem)] tracking-tight leading-none break-all text-bone"
+            class="reveal mail-link font-display font-extrabold text-[clamp(1.35rem,7vw,4.5rem)] tracking-tight leading-none break-words text-bone"
           >
             let’s build@vampify.com
           </a>
@@ -724,22 +834,6 @@
         const reduceMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)"
         ).matches;
-
-        const toggle = document.getElementById("menu-toggle");
-        const menu = document.getElementById("mobile-menu");
-        if (toggle && menu) {
-          const setOpen = (open) => {
-            menu.classList.toggle("is-open", open);
-            toggle.setAttribute("aria-expanded", String(open));
-            toggle.textContent = open ? "Close" : "Menu";
-          };
-          toggle.addEventListener("click", () => {
-            setOpen(!menu.classList.contains("is-open"));
-          });
-          menu.querySelectorAll(".mobile-link").forEach((link) => {
-            link.addEventListener("click", () => setOpen(false));
-          });
-        }
 
         const reveals = document.querySelectorAll(".reveal");
         if (reduceMotion) {

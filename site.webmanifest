@@ -1,0 +1,21 @@
+{
+  "name": "VAMPIFY",
+  "short_name": "VAMPIFY",
+  "description": "Premium website refreshment studio.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "icons": [
+    {
+      "src": "/assets/vampify-small.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/assets/vampify-small.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
