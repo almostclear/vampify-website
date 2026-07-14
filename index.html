@@ -343,27 +343,13 @@
         box-shadow: inset 3px 0 0 0 var(--neon);
       }
 
-      #mobile-menu {
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-0.5rem);
-        transition: opacity 0.25s ease, transform 0.25s ease;
-      }
-
-      #mobile-menu.is-open {
-        opacity: 1;
-        pointer-events: auto;
-        transform: none;
-      }
-
       @media (prefers-reduced-motion: reduce) {
         .reveal,
         .nav-link::after,
         .cta,
         .mail-link,
         .ba-after,
-        .ba-divider,
-        #mobile-menu {
+        .ba-divider {
           transition: none !important;
         }
 
