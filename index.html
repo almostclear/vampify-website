@@ -234,33 +234,15 @@
         transition: clip-path 0.55s cubic-bezier(0.22, 1, 0.36, 1);
       }
 
-      .ba:hover .ba-after,
-      .ba:focus-within .ba-after,
-      .ba.is-active .ba-after {
-        clip-path: inset(0 0 0 0);
-      }
-
       .ba-divider {
         left: 0%;
         z-index: 3;
         transition: left 0.55s cubic-bezier(0.22, 1, 0.36, 1);
       }
 
-      .ba:hover .ba-divider,
-      .ba:focus-within .ba-divider,
-      .ba.is-active .ba-divider {
-        left: 100%;
-      }
-
       .ba-after-inner {
         opacity: 0;
         transition: opacity 0.35s ease 0.05s;
-      }
-
-      .ba:hover .ba-after-inner,
-      .ba:focus-within .ba-after-inner,
-      .ba.is-active .ba-after-inner {
-        opacity: 1;
       }
 
       .ba-frame {
@@ -295,17 +277,53 @@
         z-index: 0;
       }
 
-      .ba:hover .ba-layer-before .ba-tag,
-      .ba:focus-within .ba-layer-before .ba-tag,
-      .ba.is-active .ba-layer-before .ba-tag {
-        opacity: 0;
+      /* Desktop: hover only (no focus sticky lock). Keyboard uses is-active. */
+      @media (hover: hover) and (pointer: fine) {
+        .ba:hover .ba-after,
+        .ba.is-active .ba-after {
+          clip-path: inset(0 0 0 0);
+        }
+
+        .ba:hover .ba-divider,
+        .ba.is-active .ba-divider {
+          left: 100%;
+        }
+
+        .ba:hover .ba-after-inner,
+        .ba.is-active .ba-after-inner {
+          opacity: 1;
+        }
+
+        .ba:hover .ba-layer-before .ba-tag,
+        .ba.is-active .ba-layer-before .ba-tag {
+          opacity: 0;
+        }
+      }
+
+      /* Touch: tap toggles .is-active only — never focus-within */
+      @media (hover: none), (pointer: coarse) {
+        .ba.is-active .ba-after {
+          clip-path: inset(0 0 0 0);
+        }
+
+        .ba.is-active .ba-divider {
+          left: 100%;
+        }
+
+        .ba.is-active .ba-after-inner {
+          opacity: 1;
+        }
+
+        .ba.is-active .ba-layer-before .ba-tag {
+          opacity: 0;
+        }
       }
 
       .ba-hint {
         display: none;
       }
 
-      @media (hover: none) {
+      @media (hover: none), (pointer: coarse) {
         .ba-hint {
           display: block;
           position: absolute;
@@ -323,8 +341,16 @@
           pointer-events: none;
         }
 
-        .ba.is-active .ba-hint {
-          opacity: 0;
+        .ba-hint-reset {
+          display: none;
+        }
+
+        .ba.is-active .ba-hint-compare {
+          display: none;
+        }
+
+        .ba.is-active .ba-hint-reset {
+          display: block;
         }
       }
 
@@ -362,10 +388,17 @@
           clip-path: inset(0 100% 0 0);
         }
 
-        .ba:hover .ba-after,
-        .ba:focus-within .ba-after,
-        .ba.is-active .ba-after {
-          clip-path: inset(0 0 0 0);
+        @media (hover: hover) and (pointer: fine) {
+          .ba:hover .ba-after,
+          .ba.is-active .ba-after {
+            clip-path: inset(0 0 0 0);
+          }
+        }
+
+        @media (hover: none), (pointer: coarse) {
+          .ba.is-active .ba-after {
+            clip-path: inset(0 0 0 0);
+          }
         }
 
         .ba-after-inner {
@@ -648,7 +681,8 @@
                 role="img"
                 aria-label="Pure Education before and after. Tap or hover to compare."
               >
-                <span class="ba-hint">Tap to compare</span>
+                <span class="ba-hint ba-hint-compare">Tap to compare</span>
+                <span class="ba-hint ba-hint-reset">Tap for before</span>
                 <div class="ba-layer ba-layer-before">
                   <img
                     src="assets/pe-before.png"
@@ -843,12 +877,22 @@
 
         document.querySelectorAll(".ba").forEach((card) => {
           const media = card.querySelector(".ba-media");
-          const toggleActive = () => {
-            if (window.matchMedia("(hover: hover)").matches) return;
+          if (!media) return;
+
+          const finePointer = () =>
+            window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+          media.addEventListener("click", () => {
+            if (finePointer()) {
+              // Mouse click focuses tabindex nodes and used to lock After open.
+              media.blur();
+              card.classList.remove("is-active");
+              return;
+            }
             card.classList.toggle("is-active");
-          };
-          media?.addEventListener("click", toggleActive);
-          media?.addEventListener("keydown", (e) => {
+          });
+
+          media.addEventListener("keydown", (e) => {
             if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
               card.classList.toggle("is-active");
