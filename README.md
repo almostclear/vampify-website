@@ -15,7 +15,8 @@ npx serve .
 - Static HTML
 - Tailwind CSS (CDN)
 - Vanilla JS
-- Brand assets for dark UI: `vampify-transparent-white.png`, `vampify-small-transparent-light.png`
+- Brand assets live in `assets/` (`vampify-transparent-white.png`, `vampify-small-transparent-light.png`)
+- Case-study screenshots: `assets/pe-before.png`, `assets/pe-new.png` (2559×1354)
 
 ## Deploy
 
