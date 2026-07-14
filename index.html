@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VAMPiFY — We refresh websites.</title>
+    <meta
+      name="description"
+      content="VAMPiFY is a premium website refreshment studio. We audit, redesign, and deploy modern sites with editorial precision."
+    />
+    <meta property="og:title" content="VAMPiFY — We refresh websites." />
+    <meta
+      property="og:description"
+      content="Premium website refreshment and redesign. Audited. Rebuilt. Deployed."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./vampify-small.jpg" />
+    <link rel="icon" type="image/png" href="./vampify-small-transparent.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: "#121212",
+              bone: "#F5F5F0",
+              neon: "#7FFF7F",
+              line: "rgba(245, 245, 240, 0.14)",
+              muted: "rgba(245, 245, 240, 0.55)",
+            },
+            fontFamily: {
+              display: ['"Urbanist"', "system-ui", "sans-serif"],
+              editorial: ['"Instrument Serif"', "Georgia", "serif"],
+            },
+            letterSpacing: {
+              widest2: "0.28em",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :root {
+        --ink: #121212;
+        --bone: #f5f5f0;
+        --neon: #7fff7f;
+        --line: rgba(245, 245, 240, 0.14);
+      }
+
+      html {
+        background: var(--ink);
+      }
+
+      body {
+        background: var(--ink);
+        color: var(--bone);
+        font-family: "Urbanist", system-ui, sans-serif;
+      }
+
+      .rule {
+        border-color: var(--line);
+      }
+
+      .blueprint {
+        box-shadow: inset 0 0 0 1px var(--line);
+      }
+
+      .nav-link {
+        position: relative;
+        transition: color 0.25s ease;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.15em;
+        width: 0;
+        height: 1px;
+        background: var(--neon);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover,
+      .nav-link:focus-visible {
+        color: var(--neon);
+        outline: none;
+      }
+
+      .nav-link:hover::after,
+      .nav-link:focus-visible::after {
+        width: 100%;
+      }
+
+      .cta {
+        transition: background-color 0.25s ease, color 0.25s ease,
+          border-color 0.25s ease;
+      }
+
+      .cta:hover,
+      .cta:focus-visible {
+        background: var(--neon);
+        color: var(--ink);
+        border-color: var(--neon);
+        outline: none;
+      }
+
+      .mail-link {
+        transition: color 0.3s ease;
+      }
+
+      .mail-link:hover,
+      .mail-link:focus-visible {
+        color: var(--neon);
+        outline: none;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(1.25rem);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      .ba-after {
+        clip-path: inset(0 50% 0 0);
+        transition: clip-path 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .ba:hover .ba-after,
+      .ba:focus-within .ba-after,
+      .ba.is-active .ba-after {
+        clip-path: inset(0 0 0 0);
+      }
+
+      .ba-divider {
+        left: 50%;
+        transition: left 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .ba:hover .ba-divider,
+      .ba:focus-within .ba-divider,
+      .ba.is-active .ba-divider {
+        left: 100%;
+      }
+
+      #mobile-menu {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-0.5rem);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+
+      #mobile-menu.is-open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal,
+        .nav-link::after,
+        .cta,
+        .mail-link,
+        .ba-after,
+        .ba-divider,
+        #mobile-menu {
+          transition: none !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+
+        .ba-after {
+          clip-path: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased overflow-x-hidden">
+    <!-- Blueprint frame -->
+    <div
+      class="pointer-events-none fixed inset-3 md:inset-5 border border-line z-50"
+      aria-hidden="true"
+    ></div>
+
+    <header
+      class="fixed top-0 left-0 right-0 z-40 bg-ink/90 backdrop-blur-sm border-b border-line"
+    >
+      <div
+        class="mx-auto max-w-7xl px-6 md:px-10 h-16 md:h-20 flex items-center justify-between"
+      >
+        <a
+          href="#top"
+          class="font-display font-extrabold text-xl md:text-2xl tracking-tight text-bone hover:text-bone focus-visible:outline focus-visible:outline-1 focus-visible:outline-neon"
+          aria-label="VAMPiFY home"
+        >
+          V<span class="text-neon">.</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-10" aria-label="Primary">
+          <a href="#philosophy" class="nav-link text-sm tracking-widest2 uppercase text-bone/80"
+            >Philosophy</a
+          >
+          <a href="#work" class="nav-link text-sm tracking-widest2 uppercase text-bone/80"
+            >Work</a
+          >
+          <a href="#contact" class="nav-link text-sm tracking-widest2 uppercase text-bone/80"
+            >Contact</a
+          >
+        </nav>
+
+        <button
+          type="button"
+          id="menu-toggle"
+          class="md:hidden text-sm tracking-widest2 uppercase text-bone/80 hover:text-neon focus-visible:outline focus-visible:outline-1 focus-visible:outline-neon"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          Menu
+        </button>
+      </div>
+
+      <div
+        id="mobile-menu"
+        class="md:hidden border-t border-line bg-ink absolute left-0 right-0 top-full"
+      >
+        <nav class="flex flex-col px-6 py-6 gap-5" aria-label="Mobile">
+          <a
+            href="#philosophy"
+            class="mobile-link text-sm tracking-widest2 uppercase text-bone/90 hover:text-neon"
+            >Philosophy</a
+          >
+          <a
+            href="#work"
+            class="mobile-link text-sm tracking-widest2 uppercase text-bone/90 hover:text-neon"
+            >Work</a
+          >
+          <a
+            href="#contact"
+            class="mobile-link text-sm tracking-widest2 uppercase text-bone/90 hover:text-neon"
+            >Contact</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Hero -->
+      <section
+        class="min-h-[100svh] flex flex-col justify-end pb-16 md:pb-24 pt-28 md:pt-32 px-6 md:px-10"
+      >
+        <div class="mx-auto max-w-7xl w-full">
+          <p
+            class="reveal font-editorial text-neon text-lg md:text-xl italic mb-6 md:mb-8"
+          >
+            VAMPiFY
+          </p>
+          <h1
+            class="reveal font-display font-extrabold text-[clamp(2.75rem,9vw,7.5rem)] leading-[0.95] tracking-tight text-bone max-w-[12ch]"
+          >
+            We refresh websites.
+          </h1>
+          <div
+            class="reveal mt-8 md:mt-12 flex flex-col sm:flex-row sm:items-end gap-8 sm:gap-14"
+          >
+            <p
+              class="font-display text-[0.7rem] tracking-widest2 uppercase text-muted"
+            >
+              est. 2026
+            </p>
+            <a
+              href="#contact"
+              class="cta inline-flex items-center justify-center border border-bone px-8 py-3.5 text-sm tracking-widest2 uppercase font-medium w-fit"
+            >
+              Start a project
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Philosophy -->
+      <section id="philosophy" class="border-t border-line">
+        <div class="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
+          <div class="reveal max-w-2xl mb-14 md:mb-20">
+            <p
+              class="font-display text-[0.7rem] tracking-widest2 uppercase text-neon mb-4"
+            >
+              01 — Philosophy
+            </p>
+            <h2
+              class="font-display font-bold text-3xl md:text-5xl tracking-tight mb-5"
+            >
+              The refresh process.
+            </h2>
+            <p class="font-editorial text-xl md:text-2xl text-muted leading-snug">
+              Three precise stages. No bloat, no guesswork—just clarity from
+              audit to launch.
+            </p>
+          </div>
+
+          <div
+            class="reveal grid md:grid-cols-3 border border-line divide-y md:divide-y-0 md:divide-x divide-[color:var(--line)]"
+          >
+            <article class="p-8 md:p-10">
+              <p
+                class="font-display text-[0.65rem] tracking-widest2 uppercase text-neon mb-6"
+              >
+                01 / Audit
+              </p>
+              <h3 class="font-display font-semibold text-2xl mb-4">Diagnose</h3>
+              <p class="text-muted leading-relaxed font-light text-[0.95rem]">
+                We read the site like a brief: structure, speed, hierarchy, and
+                what no longer earns its place on the page.
+              </p>
+            </article>
+            <article class="p-8 md:p-10">
+              <p
+                class="font-display text-[0.65rem] tracking-widest2 uppercase text-neon mb-6"
+              >
+                02 / Redesign
+              </p>
+              <h3 class="font-display font-semibold text-2xl mb-4">Rebuild</h3>
+              <p class="text-muted leading-relaxed font-light text-[0.95rem]">
+                Typographic authority, intentional composition, and a visual
+                system that feels current without chasing trends.
+              </p>
+            </article>
+            <article class="p-8 md:p-10">
+              <p
+                class="font-display text-[0.65rem] tracking-widest2 uppercase text-neon mb-6"
+              >
+                03 / Deploy
+              </p>
+              <h3 class="font-display font-semibold text-2xl mb-4">Launch</h3>
+              <p class="text-muted leading-relaxed font-light text-[0.95rem]">
+                Fast static delivery, polished interactions, and a clean
+                handoff—so the refresh actually ships.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work -->
+      <section id="work" class="border-t border-line">
+        <div class="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
+          <div class="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 md:mb-20">
+            <div class="max-w-xl">
+              <p
+                class="font-display text-[0.7rem] tracking-widest2 uppercase text-neon mb-4"
+              >
+                02 — Selected Work
+              </p>
+              <h2
+                class="font-display font-bold text-3xl md:text-5xl tracking-tight"
+              >
+                Before &amp; after.
+              </h2>
+            </div>
+            <p
+              class="font-editorial text-lg md:text-xl text-muted max-w-sm leading-snug"
+            >
+              Hover a project to reveal the refresh. Placeholders for the
+              portfolio ahead.
+            </p>
+          </div>
+
+          <div class="space-y-0 border border-line">
+            <!-- Project 1 -->
+            <article
+              class="reveal ba group border-b border-line last:border-b-0 grid lg:grid-cols-12"
+              tabindex="0"
+            >
+              <div
+                class="lg:col-span-4 p-8 md:p-10 flex flex-col justify-between gap-8 border-b lg:border-b-0 lg:border-r border-line"
+              >
+                <div>
+                  <p
+                    class="font-display text-[0.65rem] tracking-widest2 uppercase text-muted mb-3"
+                  >
+                    01 — Editorial
+                  </p>
+                  <h3 class="font-display font-semibold text-2xl md:text-3xl">
+                    Atelier Nord
+                  </h3>
+                </div>
+                <p class="text-sm text-muted font-light leading-relaxed">
+                  From cluttered storefront to architectural quiet. Hover to
+                  compare.
+                </p>
+              </div>
+              <div class="lg:col-span-8 relative min-h-[240px] md:min-h-[360px] overflow-hidden">
+                <div
+                  class="absolute inset-0 bg-[#1c1c1c] flex items-center justify-center"
+                >
+                  <span
+                    class="font-display text-[0.65rem] tracking-widest2 uppercase text-muted"
+                    >Before</span
+                  >
+                </div>
+                <div
+                  class="ba-after absolute inset-0 bg-[#1a2a1a] flex items-center justify-center border-r border-neon/40"
+                >
+                  <span
+                    class="font-display text-[0.65rem] tracking-widest2 uppercase text-neon"
+                    >After</span
+                  >
+                </div>
+                <div
+                  class="ba-divider absolute top-0 bottom-0 w-px bg-neon z-10 pointer-events-none"
+                  aria-hidden="true"
+                ></div>
+              </div>
+            </article>
+
+            <!-- Project 2 — asymmetrical: wide media first on large screens via order -->
+            <article
+              class="reveal ba group border-b border-line last:border-b-0 grid lg:grid-cols-12"
+              tabindex="0"
+            >
+              <div
+                class="lg:col-span-7 relative min-h-[220px] md:min-h-[300px] overflow-hidden order-2 lg:order-1 border-t lg:border-t-0 lg:border-r border-line"
+              >
+                <div
+                  class="absolute inset-0 bg-[#1c1c1c] flex items-center justify-center"
+                >
+                  <span
+                    class="font-display text-[0.65rem] tracking-widest2 uppercase text-muted"
+                    >Before</span
+                  >
+                </div>
+                <div
+                  class="ba-after absolute inset-0 bg-[#1a2a1a] flex items-center justify-center border-r border-neon/40"
+                >
+                  <span
+                    class="font-display text-[0.65rem] tracking-widest2 uppercase text-neon"
+                    >After</span
+                  >
+                </div>
+                <div
+                  class="ba-divider absolute top-0 bottom-0 w-px bg-neon z-10 pointer-events-none"
+                  aria-hidden="true"
+                ></div>
+              </div>
+              <div
+                class="lg:col-span-5 p-8 md:p-10 flex flex-col justify-between gap-8 order-1 lg:order-2"
+              >
+                <div>
+                  <p
+                    class="font-display text-[0.65rem] tracking-widest2 uppercase text-muted mb-3"
+                  >
+                    02 — Hospitality
+                  </p>
+                  <h3 class="font-display font-semibold text-2xl md:text-3xl">
+                    Static House
+                  </h3>
+                </div>
+                <p class="text-sm text-muted font-light leading-relaxed">
+                  A booking experience reduced to essentials—presence over
+                  panes of cards.
+                </p>
+              </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article
+              class="reveal ba group grid lg:grid-cols-12"
+              tabindex="0"
+            >
+              <div
+                class="lg:col-span-4 p-8 md:p-10 flex flex-col justify-between gap-8 border-b lg:border-b-0 lg:border-r border-line"
+              >
+                <div>
+                  <p
+                    class="font-display text-[0.65rem] tracking-widest2 uppercase text-muted mb-3"
+                  >
+                    03 — Product
+                  </p>
+                  <h3 class="font-display font-semibold text-2xl md:text-3xl">
+                    Kinetic Co
+                  </h3>
+                </div>
+                <p class="text-sm text-muted font-light leading-relaxed">
+                  Motion with intent. A sharper identity and a cleaner path to
+                  purchase.
+                </p>
+              </div>
+              <div class="lg:col-span-8 relative min-h-[280px] md:min-h-[420px] overflow-hidden">
+                <div
+                  class="absolute inset-0 bg-[#1c1c1c] flex items-center justify-center"
+                >
+                  <span
+                    class="font-display text-[0.65rem] tracking-widest2 uppercase text-muted"
+                    >Before</span
+                  >
+                </div>
+                <div
+                  class="ba-after absolute inset-0 bg-[#1a2a1a] flex items-center justify-center border-r border-neon/40"
+                >
+                  <span
+                    class="font-display text-[0.65rem] tracking-widest2 uppercase text-neon"
+                    >After</span
+                  >
+                </div>
+                <div
+                  class="ba-divider absolute top-0 bottom-0 w-px bg-neon z-10 pointer-events-none"
+                  aria-hidden="true"
+                ></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="border-t border-line">
+        <div
+          class="mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-36 text-center"
+        >
+          <p
+            class="reveal font-display text-[0.7rem] tracking-widest2 uppercase text-neon mb-8"
+          >
+            03 — Contact
+          </p>
+          <a
+            href="mailto:lets.build@vampify.com"
+            class="reveal mail-link font-display font-extrabold text-[clamp(1.75rem,6vw,4.5rem)] tracking-tight leading-none break-all"
+          >
+            let’s build@vampify.com
+          </a>
+          <p
+            class="reveal mt-10 font-editorial text-lg text-muted italic"
+          >
+            Tell us what needs refreshing.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-line">
+      <div
+        class="mx-auto max-w-7xl px-6 md:px-10 py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+      >
+        <p class="font-display text-[0.65rem] tracking-widest2 uppercase text-muted">
+          © 2026 VAMPiFY
+        </p>
+        <p class="font-display text-[0.65rem] tracking-widest2 uppercase text-muted">
+          Websites, rebuilt.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        // Mobile menu
+        const toggle = document.getElementById("menu-toggle");
+        const menu = document.getElementById("mobile-menu");
+        if (toggle && menu) {
+          const setOpen = (open) => {
+            menu.classList.toggle("is-open", open);
+            toggle.setAttribute("aria-expanded", String(open));
+            toggle.textContent = open ? "Close" : "Menu";
+          };
+          toggle.addEventListener("click", () => {
+            setOpen(!menu.classList.contains("is-open"));
+          });
+          menu.querySelectorAll(".mobile-link").forEach((link) => {
+            link.addEventListener("click", () => setOpen(false));
+          });
+        }
+
+        // Reveal on scroll
+        const reveals = document.querySelectorAll(".reveal");
+        if (reduceMotion) {
+          reveals.forEach((el) => el.classList.add("is-visible"));
+        } else if ("IntersectionObserver" in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+          );
+          reveals.forEach((el) => io.observe(el));
+        } else {
+          reveals.forEach((el) => el.classList.add("is-visible"));
+        }
+
+        // Touch / keyboard: toggle before-after on projects
+        document.querySelectorAll(".ba").forEach((card) => {
+          card.addEventListener("click", (e) => {
+            if (window.matchMedia("(hover: hover)").matches) return;
+            e.preventDefault();
+            card.classList.toggle("is-active");
+          });
+          card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              card.classList.toggle("is-active");
+            }
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
