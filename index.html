@@ -15,8 +15,8 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="vampify.jpg" />
-    <link rel="icon" type="image/jpeg" href="vampify-small.jpg" />
-    <link rel="apple-touch-icon" href="vampify-small.jpg" />
+    <link rel="icon" type="image/png" href="vampify-small-transparent-light.png" />
+    <link rel="apple-touch-icon" href="vampify-small-transparent-light.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -221,13 +221,15 @@
       }
     </style>
   </head>
-  <body class="antialiased overflow-x-hidden p-3 md:p-5">
-    <!-- Blueprint frame: layout shell so the header lives inside the border -->
+  <body class="antialiased overflow-x-hidden">
+    <!-- Blueprint frame sits under the header so scroll never leaves a gap above nav -->
     <div
-      class="relative flex flex-col min-h-[calc(100svh-1.5rem)] md:min-h-[calc(100svh-2.5rem)] border border-line"
-    >
+      class="pointer-events-none fixed inset-3 md:inset-5 border border-line z-30"
+      aria-hidden="true"
+    ></div>
+
     <header
-      class="sticky top-3 md:top-5 z-40 bg-ink/95 backdrop-blur-sm border-b border-line"
+      class="fixed top-0 left-0 right-0 z-40 bg-ink/95 backdrop-blur-sm border-b border-line"
     >
       <div
         class="mx-auto max-w-7xl px-6 md:px-10 h-16 md:h-20 flex items-center justify-between"
@@ -238,11 +240,11 @@
           aria-label="VAMPIFY home"
         >
           <img
-            src="vampify-small.jpg"
+            src="vampify-small-transparent-light.png"
             alt=""
             width="36"
             height="36"
-            class="h-9 w-9 object-cover border border-line"
+            class="h-9 w-9 object-contain"
           />
           <span class="font-display font-extrabold text-lg md:text-xl tracking-[0.14em] text-bone">
             VAMPIFY
@@ -300,11 +302,24 @@
       </div>
     </header>
 
-    <main id="top" class="flex-1">
+    <main id="top">
       <!-- Hero -->
       <section
-        class="hero-glow min-h-[calc(100svh-1.5rem)] md:min-h-[calc(100svh-2.5rem)] flex flex-col justify-end pb-16 md:pb-24 pt-28 md:pt-32 px-6 md:px-10 relative"
+        class="hero-glow min-h-[100svh] flex flex-col justify-end pb-16 md:pb-24 pt-28 md:pt-32 px-6 md:px-10 relative"
       >
+        <div
+          class="absolute top-24 right-6 md:right-10 md:top-28 w-32 sm:w-40 md:w-48"
+          aria-hidden="true"
+        >
+          <img
+            src="vampify-transparent-white.png"
+            alt=""
+            width="512"
+            height="512"
+            class="w-full h-auto block"
+          />
+        </div>
+
         <div class="mx-auto max-w-7xl w-full relative">
           <p
             class="reveal font-display text-[0.7rem] tracking-widest2 uppercase text-neon mb-5 md:mb-7"
@@ -594,11 +609,11 @@
                   "
                 >
                   <img
-                    src="vampify-small.jpg"
+                    src="vampify-small-transparent-light.png"
                     alt=""
                     width="48"
                     height="48"
-                    class="h-12 w-12 object-cover border border-neon/40"
+                    class="h-12 w-12 object-contain"
                   />
                   <span
                     class="font-display text-[0.65rem] tracking-widest2 uppercase text-neon"
@@ -646,11 +661,11 @@
       >
         <div class="flex items-center gap-3">
           <img
-            src="vampify-small.jpg"
+            src="vampify-small-transparent-light.png"
             alt=""
             width="24"
             height="24"
-            class="h-6 w-6 object-cover border border-line"
+            class="h-6 w-6 object-contain"
           />
           <p
             class="font-display text-[0.65rem] tracking-widest2 uppercase text-mist"
@@ -665,7 +680,6 @@
         </p>
       </div>
     </footer>
-    </div>
 
     <script>
       (function () {

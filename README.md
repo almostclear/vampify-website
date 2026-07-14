@@ -15,7 +15,7 @@ npx serve .
 - Static HTML
 - Tailwind CSS (CDN)
 - Vanilla JS
-- Brand assets: `vampify.jpg`, `vampify-small.jpg` (use these on dark backgrounds; transparent PNGs are black marks and disappear on `#121212`)
+- Brand assets for dark UI: `vampify-transparent-white.png`, `vampify-small-transparent-light.png`
 
 ## Deploy
 
