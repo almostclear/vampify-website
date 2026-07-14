@@ -20,19 +20,25 @@ npx serve .
 
 ## Deploy
 
-**Cloudflare Pages (recommended)**
+### Cloudflare Workers (static assets) — current default
 
-1. Log in at [Cloudflare Pages](https://pages.cloudflare.com)
-2. Create a project → connect `almostclear/vampify-website` (or upload this folder)
-3. Build settings: leave build command empty; output directory `/` (or `.`)
-4. Deploy, then attach a custom domain for HTTPS
+Cloudflare’s dashboard now creates **Workers**, not classic Pages. This repo includes [`wrangler.jsonc`](wrangler.jsonc) so a Git-connected Worker serves the site as **static files** (no Worker script).
 
-**Netlify**
+1. Workers & Pages → Create → Connect to Git → `vampify-website`
+2. Build command: leave empty, or `exit 0`
+3. Deploy / asset settings should pick up `wrangler.jsonc` (`assets.directory` = `./`)
+4. After deploy you get a `*.workers.dev` URL; attach a custom domain in the Worker settings
 
-- Netlify Drop the folder, or connect the GitHub repo with publish directory = site root.
+Local check (optional):
 
-**GitHub Pages**
+```bash
+npx wrangler deploy
+```
 
-- Settings → Pages → Deploy from `main` / root.
+### Classic Cloudflare Pages (still fine)
 
-No build step required. CDN-hosted Tailwind and fonts need network on first load.
+1. Create a **Pages** project (not a Worker) → connect the same repo  
+2. Build command: empty / `exit 0`  
+3. Output directory: `/` or `.`
+
+**Netlify** / **GitHub Pages**: publish the repo root; no build step.
