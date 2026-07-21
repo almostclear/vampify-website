@@ -4,17 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <title>Palette</title>
+    <title>VAMPIFY — A5 Leaflet</title>
     <style>
-      /* VAMPIFY brand tokens — light mode inversion for print */
+      /* VAMPIFY leaflet — A5 double-sided, printed straight from this file.
+         Print: File > Print > A5, no margins, double-sided (flip on long edge),
+         and enable "Background graphics". */
+
       :root {
-        --paper: #f7f7f2; /* bone, now the canvas */
+        --paper: #f7f7f2;
         --panel: #edede6;
-        --wash: #e6f0e6; /* light green wash */
-        --ink: #121212; /* now the accent/shape color */
-        --mist: #4a4a44; /* mid tone on light */
+        --wash: #e6f0e6;
+        --ink: #121212;
+        --mist: #4a4a44;
         --neon: #7fff7f;
-        --neon-dim: #3d9a3d; /* better contrast green for print */
+        --neon-dim: #3d9a3d;
         --line: rgba(18, 18, 18, 0.22);
       }
 
@@ -24,172 +27,117 @@
         box-sizing: border-box;
       }
 
+      html,
       body {
-        background: var(--paper);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
 
-      section {
-        min-height: 100vh;
+      /* Screen preview: pages floating on a dark backdrop */
+      body {
+        background: #2a2a2a;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 2rem;
+        padding: 2rem;
+        font-family: "Urbanist", system-ui, sans-serif;
+      }
+
+      /* A5 portrait: 148mm x 210mm */
+      .page {
+        width: 148mm;
+        height: 210mm;
         position: relative;
+        overflow: hidden;
+        background: var(--paper);
+        border: 4px solid var(--ink); /* the ink edge from the screenshot */
+        flex: none;
       }
 
-      /* 1. Hero canvas — light paper with soft green radiance */
-      .glow {
+      /* Soft green glow rising from the bottom, as in the reference */
+      .page-front {
         background:
           radial-gradient(
-            ellipse 70% 55% at 12% 88%,
-            rgba(127, 255, 127, 0.28),
-            transparent 60%
-          ),
-          radial-gradient(
-            ellipse 45% 40% at 92% 18%,
-            rgba(127, 255, 127, 0.12),
-            transparent 55%
+            ellipse 130% 55% at 50% 108%,
+            rgba(127, 255, 127, 0.45),
+            rgba(127, 255, 127, 0.18) 45%,
+            transparent 75%
           ),
           var(--paper);
       }
 
-      .frame {
+      /* Back: same language, glow from the top so the fold feels mirrored */
+      .page-back {
+        background:
+          radial-gradient(
+            ellipse 130% 55% at 50% -8%,
+            rgba(127, 255, 127, 0.45),
+            rgba(127, 255, 127, 0.18) 45%,
+            transparent 75%
+          ),
+          var(--paper);
+      }
+
+      /* Inner hairline frame — the blueprint line from the site */
+      .inner-frame {
         position: absolute;
-        inset: 1.25rem;
+        inset: 6mm;
         border: 1px solid var(--line);
         pointer-events: none;
       }
 
-      .dot {
+      /* Content area: everything text/layout goes in here next */
+      .content {
         position: absolute;
-        bottom: 18%;
-        left: 8%;
-        width: 3.5rem;
-        height: 3.5rem;
-        border-radius: 50%;
-        background: var(--neon-dim);
+        inset: 12mm;
+        display: flex;
+        flex-direction: column;
       }
 
-      .bar {
-        position: absolute;
-        bottom: 10%;
-        left: 8%;
-        width: 14rem;
-        height: 3.25rem;
-        background: var(--ink);
+      /* Print rules */
+      @page {
+        size: A5 portrait;
+        margin: 0;
       }
 
-      .rule-v {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 1px;
-        background: var(--line);
-      }
+      @media print {
+        body {
+          background: none;
+          display: block;
+          padding: 0;
+          gap: 0;
+        }
 
-      /* 2. Swatch strip — flat light-mode brand colors edge to edge */
-      .swatches {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
-        min-height: 40vh;
-      }
+        .page {
+          border-width: 4px; /* keep the ink edge on paper */
+          page-break-after: always;
+          break-after: page;
+        }
 
-      .swatches > div {
-        border-right: 1px solid var(--line);
-      }
-
-      .c-paper { background: #f7f7f2; }
-      .c-panel { background: #edede6; }
-      .c-wash { background: #e6f0e6; }
-      .c-neon { background: #7fff7f; }
-      .c-neon-dim { background: #3d9a3d; }
-      .c-ink { background: #121212; }
-
-      /* 3. Panel grid — bordered layout rhythm on light */
-      .grid3 {
-        min-height: 60vh;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
-      }
-
-      .grid3 > div {
-        border-right: 1px solid var(--line);
-        position: relative;
-      }
-
-      .grid3 > div:last-child {
-        border-right: none;
-      }
-
-      .accent-left {
-        box-shadow: inset 3px 0 0 0 var(--neon-dim);
-      }
-
-      .tick {
-        position: absolute;
-        top: 2.5rem;
-        left: 2.5rem;
-        width: 2.5rem;
-        height: 1px;
-        background: var(--neon-dim);
-      }
-
-      .p-paper { background: #f7f7f2; }
-      .p-panel { background: #edede6; }
-      .p-wash { background: #e6f0e6; }
-
-      /* 4. Footer wash — green rising glow on light paper */
-      .contact {
-        min-height: 70vh;
-        background:
-          radial-gradient(
-            ellipse 60% 70% at 50% 100%,
-            rgba(127, 255, 127, 0.3),
-            transparent 55%
-          ),
-          #edf4ed;
-      }
-
-      .center-rule {
-        position: absolute;
-        top: 45%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 4rem;
-        height: 1px;
-        background: var(--neon-dim);
+        .page:last-child {
+          page-break-after: auto;
+          break-after: auto;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- Crop 1: light hero — paper + soft green glow + blueprint frame -->
-    <section class="glow">
-      <div class="frame"></div>
-      <div class="rule-v" style="left: 33%"></div>
-      <div class="rule-v" style="left: 66%"></div>
-      <div class="dot"></div>
-      <div class="bar"></div>
+    <!-- FRONT — glow rises from the bottom -->
+    <section class="page page-front">
+      <div class="inner-frame"></div>
+      <div class="content">
+        <!-- front content goes here -->
+      </div>
     </section>
 
-    <!-- Crop 2: flat swatch strip (paper / panel / wash / neon / print green / ink) -->
-    <section class="swatches">
-      <div class="c-paper"></div>
-      <div class="c-panel"></div>
-      <div class="c-wash"></div>
-      <div class="c-neon"></div>
-      <div class="c-neon-dim"></div>
-      <div class="c-ink"></div>
-    </section>
-
-    <!-- Crop 3: bordered panel rhythm with green accent column -->
-    <section class="grid3">
-      <div class="p-paper"><span class="tick"></span></div>
-      <div class="p-wash accent-left"></div>
-      <div class="p-panel"><span class="tick"></span></div>
-    </section>
-
-    <!-- Crop 4: footer wash — green glow rising from the bottom edge -->
-    <section class="contact">
-      <div class="frame"></div>
-      <div class="center-rule"></div>
+    <!-- BACK — glow falls from the top -->
+    <section class="page page-back">
+      <div class="inner-frame"></div>
+      <div class="content">
+        <!-- back content goes here -->
+      </div>
     </section>
   </body>
 </html>
