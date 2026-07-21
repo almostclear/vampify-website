@@ -115,8 +115,11 @@
 
       /* ---------- front ---------- */
 
+      /* Square source canvas: crop to the central wordmark strip */
       .front-logo {
         width: 52mm;
+        height: 17mm;
+        object-fit: cover;
         margin: 0 auto 2mm;
         display: block;
       }
@@ -203,7 +206,7 @@
       }
 
       .front-foot {
-        margin-top: 5mm;
+        margin-top: 4mm;
         display: flex;
         justify-content: space-between;
         align-items: baseline;
