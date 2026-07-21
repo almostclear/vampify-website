@@ -13,6 +13,18 @@
     />
     <style>
       :root {
+        /* Duplex calibration: shifts ONLY the backs page to compensate for
+           your printer's front/back registration offset.
+           Hold a printed sheet up to the light, back facing you, and compare
+           the dashed guides:
+           - backs sit too far RIGHT  -> make --back-shift-x negative (e.g. -1mm)
+           - backs sit too far LEFT   -> positive
+           - backs sit too far DOWN   -> make --back-shift-y negative
+           - backs sit too far UP     -> positive
+           Then re-run ./export-pdf.sh sheet and print again. */
+        --back-shift-x: 0mm;
+        --back-shift-y: 0mm;
+
         --paper: #f7f7f2;
         --ink: #121212;
         --mist: #4a4a44;
@@ -65,6 +77,10 @@
       .sheet:last-child {
         page-break-after: auto;
         break-after: auto;
+      }
+
+      .backs {
+        transform: translate(var(--back-shift-x), var(--back-shift-y));
       }
 
       .card {
