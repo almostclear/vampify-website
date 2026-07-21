@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>VAMPIFY — A5 Leaflet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
     <style>
       /* VAMPIFY leaflet — A5 double-sided, printed straight from this file.
          Print: File > Print > A5, no margins, double-sided (flip on long edge),
@@ -43,6 +49,7 @@
         gap: 2rem;
         padding: 2rem;
         font-family: "Urbanist", system-ui, sans-serif;
+        color: var(--ink);
       }
 
       /* A5 portrait: 148mm x 210mm */
@@ -55,7 +62,6 @@
         flex: none;
       }
 
-      /* Soft green glow rising from the bottom, as in the reference */
       .page-front {
         background:
           radial-gradient(
@@ -67,7 +73,6 @@
           var(--paper);
       }
 
-      /* Back: same language, glow from the top so the fold feels mirrored */
       .page-back {
         background:
           radial-gradient(
@@ -79,7 +84,6 @@
           var(--paper);
       }
 
-      /* Inner hairline frame — the blueprint line from the site */
       .inner-frame {
         position: absolute;
         inset: 6mm;
@@ -87,15 +91,218 @@
         pointer-events: none;
       }
 
-      /* Content area: everything text/layout goes in here next */
       .content {
         position: absolute;
-        inset: 12mm;
+        inset: 11mm;
         display: flex;
         flex-direction: column;
       }
 
-      /* Print rules */
+      /* ---------- shared type ---------- */
+
+      .label {
+        font-size: 7.5pt;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--neon-dim);
+        font-weight: 600;
+      }
+
+      .editorial {
+        font-family: "Instrument Serif", Georgia, serif;
+        color: var(--mist);
+      }
+
+      /* ---------- front ---------- */
+
+      .front-logo {
+        width: 52mm;
+        margin: 0 auto 2mm;
+        display: block;
+      }
+
+      .front-head {
+        text-align: center;
+        margin-bottom: 6mm;
+      }
+
+      .front-head h1 {
+        font-size: 24pt;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.02;
+        margin: 2.5mm 0 2.5mm;
+      }
+
+      .front-head p {
+        font-size: 10.5pt;
+        line-height: 1.35;
+        font-style: italic;
+        max-width: 92mm;
+        margin: 0 auto;
+      }
+
+      /* 2x2 grid: three changes + handwriting box */
+      .boxes {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        border: 1px solid var(--line);
+        background: rgba(247, 247, 242, 0.55);
+      }
+
+      .box {
+        padding: 5mm;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5mm;
+      }
+
+      .box + .box {
+        border-left: 1px solid var(--line);
+      }
+
+      .box:nth-child(3) {
+        border-left: none;
+      }
+
+      .box:nth-child(3),
+      .box:nth-child(4) {
+        border-top: 1px solid var(--line);
+      }
+
+      .box h2 {
+        font-size: 12pt;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .box p {
+        font-size: 8.5pt;
+        line-height: 1.45;
+        color: var(--mist);
+      }
+
+      /* handwriting box */
+      .box-write {
+        background: rgba(230, 240, 230, 0.65);
+        box-shadow: inset 2px 0 0 0 var(--neon-dim);
+      }
+
+      .write-lines {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+      }
+
+      .write-lines span {
+        display: block;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .front-foot {
+        margin-top: 5mm;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 8pt;
+      }
+
+      .front-foot .site {
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      /* ---------- back ---------- */
+
+      .back-head {
+        margin-top: 4mm;
+      }
+
+      .back-head h1 {
+        font-size: 27pt;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.0;
+        margin: 3mm 0 4mm;
+        max-width: 100mm;
+      }
+
+      .back-copy {
+        font-size: 10.5pt;
+        line-height: 1.5;
+        max-width: 104mm;
+        color: var(--mist);
+      }
+
+      .back-copy strong {
+        color: var(--ink);
+      }
+
+      .offer {
+        margin-top: 7mm;
+        border: 1px solid var(--line);
+        background: rgba(230, 240, 230, 0.65);
+        box-shadow: inset 2px 0 0 0 var(--neon-dim);
+        padding: 5mm 6mm;
+      }
+
+      .offer p {
+        font-size: 10pt;
+        line-height: 1.45;
+        margin-top: 2mm;
+      }
+
+      .contact {
+        margin-top: auto;
+        text-align: center;
+        padding-bottom: 2mm;
+      }
+
+      .contact .email {
+        display: block;
+        font-size: 17pt;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+        text-decoration: none;
+        margin: 3mm 0 2mm;
+      }
+
+      .contact .site {
+        font-size: 9pt;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--mist);
+      }
+
+      .back-foot {
+        margin-top: 7mm;
+        padding-top: 4mm;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .back-foot img {
+        width: 10mm;
+        height: 10mm;
+        object-fit: contain;
+      }
+
+      .back-foot span {
+        font-size: 7.5pt;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--mist);
+      }
+
+      /* ---------- print ---------- */
+
       @page {
         size: A5 portrait;
         margin: 0;
@@ -122,19 +329,107 @@
     </style>
   </head>
   <body>
-    <!-- FRONT — glow rises from the bottom -->
+    <!-- FRONT -->
     <section class="page page-front">
       <div class="inner-frame"></div>
       <div class="content">
-        <!-- front content goes here -->
+        <div class="front-head">
+          <img
+            class="front-logo"
+            src="assets/vampify-transparent.png"
+            alt="VAMPIFY"
+          />
+          <p class="label">Website refreshment studio</p>
+          <h1>Your website,<br />brought up to speed.</h1>
+          <p class="editorial">
+            Hi — I’m a 19-year-old student on a mission to sharpen the tech of
+            local businesses. I took a look at your website, and here’s what
+            VAMPIFY would refresh.
+          </p>
+        </div>
+
+        <div class="boxes">
+          <div class="box">
+            <p class="label">01 — Design</p>
+            <h2>A modern face</h2>
+            <p>
+              A clean, current design that fits your brand and makes the right
+              first impression — on every screen, especially phones.
+            </p>
+          </div>
+          <div class="box">
+            <p class="label">02 — Speed</p>
+            <h2>Faster everything</h2>
+            <p>
+              Pages that load instantly. Slow sites lose visitors before they
+              even see what you offer — we make sure yours never does.
+            </p>
+          </div>
+          <div class="box">
+            <p class="label">03 — Customers</p>
+            <h2>Clearer paths</h2>
+            <p>
+              Obvious ways for customers to find you, trust you, and contact
+              you — so the site actually brings business in.
+            </p>
+          </div>
+          <div class="box box-write">
+            <p class="label">04 — Just for you</p>
+            <div class="write-lines">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="front-foot">
+          <span class="label">est. 2026</span>
+          <span class="site">vampify.co.uk</span>
+        </div>
       </div>
     </section>
 
-    <!-- BACK — glow falls from the top -->
+    <!-- BACK -->
     <section class="page page-back">
       <div class="inner-frame"></div>
       <div class="content">
-        <!-- back content goes here -->
+        <div class="back-head">
+          <p class="label">An open invitation</p>
+          <h1>Start small. Or start big.</h1>
+          <p class="back-copy">
+            A refresh doesn’t have to mean rebuilding everything. It can start
+            with <strong>one simple change</strong> — a faster homepage, a
+            cleaner menu, a contact button that actually gets pressed. Tell me
+            what bugs you about your website, or ask what I’d do with it.
+            <strong>The first conversation is free, friendly, and
+            obligation-free.</strong>
+          </p>
+        </div>
+
+        <div class="offer">
+          <p class="label">The founding offer</p>
+          <p>
+            I’m building VAMPIFY’s first portfolio — so the
+            <strong>first three businesses</strong> get their refresh
+            <strong>free</strong>, in exchange for an honest testimonial.
+            Local or global, big or small.
+          </p>
+        </div>
+
+        <div class="contact">
+          <p class="label">Say hello</p>
+          <a class="email" href="mailto:discovery@vampify.co.uk"
+            >discovery@vampify.co.uk</a
+          >
+          <p class="site">vampify.co.uk</p>
+        </div>
+
+        <div class="back-foot">
+          <img src="assets/vampify-small-transparent.png" alt="" />
+          <span>© 2026 VAMPIFY — Websites, rebuilt.</span>
+        </div>
       </div>
     </section>
   </body>
