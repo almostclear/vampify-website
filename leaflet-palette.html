@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Palette</title>
+    <style>
+      /* VAMPIFY brand tokens — identical to index.html */
+      :root {
+        --ink: #121212;
+        --panel: #1a1a1a;
+        --wash: #152015;
+        --bone: #f7f7f2;
+        --mist: #c8c8c0;
+        --neon: #7fff7f;
+        --neon-dim: #3d9a3d;
+        --line: rgba(247, 247, 242, 0.22);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--ink);
+      }
+
+      section {
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* 1. Hero glow — the main dark canvas with neon radiance */
+      .glow {
+        background:
+          radial-gradient(
+            ellipse 70% 55% at 12% 88%,
+            rgba(127, 255, 127, 0.16),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 45% 40% at 92% 18%,
+            rgba(127, 255, 127, 0.06),
+            transparent 55%
+          ),
+          var(--ink);
+      }
+
+      .frame {
+        position: absolute;
+        inset: 1.25rem;
+        border: 1px solid var(--line);
+        pointer-events: none;
+      }
+
+      .dot {
+        position: absolute;
+        bottom: 18%;
+        left: 8%;
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        background: var(--neon);
+      }
+
+      .bar {
+        position: absolute;
+        bottom: 10%;
+        left: 8%;
+        width: 14rem;
+        height: 3.25rem;
+        background: var(--neon);
+      }
+
+      .rule-v {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: var(--line);
+      }
+
+      /* 2. Swatch strip — flat brand colors edge to edge */
+      .swatches {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
+        min-height: 40vh;
+      }
+
+      .swatches > div {
+        border-right: 1px solid var(--line);
+      }
+
+      .c-ink { background: var(--ink); }
+      .c-panel { background: var(--panel); }
+      .c-wash { background: var(--wash); }
+      .c-neon-dim { background: var(--neon-dim); }
+      .c-neon { background: var(--neon); }
+      .c-bone { background: var(--bone); }
+
+      /* 3. Panel grid — the three-column bordered layout feel */
+      .grid3 {
+        min-height: 60vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .grid3 > div {
+        border-right: 1px solid var(--line);
+        position: relative;
+      }
+
+      .grid3 > div:last-child {
+        border-right: none;
+      }
+
+      .accent-left {
+        box-shadow: inset 3px 0 0 0 var(--neon);
+      }
+
+      .tick {
+        position: absolute;
+        top: 2.5rem;
+        left: 2.5rem;
+        width: 2.5rem;
+        height: 1px;
+        background: var(--neon);
+      }
+
+      /* 4. Contact glow — green wash rising from the bottom */
+      .contact {
+        min-height: 70vh;
+        background:
+          radial-gradient(
+            ellipse 60% 70% at 50% 100%,
+            rgba(127, 255, 127, 0.14),
+            transparent 55%
+          ),
+          var(--wash);
+      }
+
+      .contact .frame {
+        inset: 1.25rem;
+      }
+
+      .center-rule {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4rem;
+        height: 1px;
+        background: var(--neon);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Crop 1: hero canvas — dark + neon glow + blueprint frame -->
+    <section class="glow">
+      <div class="frame"></div>
+      <div class="rule-v" style="left: 33%"></div>
+      <div class="rule-v" style="left: 66%"></div>
+      <div class="dot"></div>
+      <div class="bar"></div>
+    </section>
+
+    <!-- Crop 2: flat swatch strip (ink / panel / wash / dim green / neon / bone) -->
+    <section class="swatches">
+      <div class="c-ink"></div>
+      <div class="c-panel"></div>
+      <div class="c-wash"></div>
+      <div class="c-neon-dim"></div>
+      <div class="c-neon"></div>
+      <div class="c-bone"></div>
+    </section>
+
+    <!-- Crop 3: bordered panel rhythm with green accent column -->
+    <section class="grid3">
+      <div class="c-ink"><span class="tick"></span></div>
+      <div class="c-wash accent-left"></div>
+      <div class="c-panel"><span class="tick"></span></div>
+    </section>
+
+    <!-- Crop 4: contact wash — green rising glow -->
+    <section class="contact">
+      <div class="frame"></div>
+      <div class="center-rule"></div>
+    </section>
+  </body>
+</html>
