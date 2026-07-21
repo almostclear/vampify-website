@@ -3,7 +3,8 @@
 # Usage:
 #   ./export-pdf.sh leaflet   -> leaflet.pdf  (from leaflet-palette.html)
 #   ./export-pdf.sh card      -> card.pdf     (from card.html)
-#   ./export-pdf.sh           -> both
+#   ./export-pdf.sh sheet     -> card-sheet.pdf (A4, eight double-sided cards)
+#   ./export-pdf.sh           -> all three
 set -euo pipefail
 
 cd "$(dirname "$0")"
@@ -55,8 +56,9 @@ target="${1:-both}"
 case "$target" in
   leaflet) render leaflet-palette.html leaflet.pdf ;;
   card)    render card.html card.pdf ;;
-  both)    render leaflet-palette.html leaflet.pdf; render card.html card.pdf ;;
-  *) echo "Usage: ./export-pdf.sh [leaflet|card|both]"; exit 1 ;;
+  sheet)   render card-sheet.html card-sheet.pdf ;;
+  both)    render leaflet-palette.html leaflet.pdf; render card.html card.pdf; render card-sheet.html card-sheet.pdf ;;
+  *) echo "Usage: ./export-pdf.sh [leaflet|card|sheet|both]"; exit 1 ;;
 esac
 
-echo "Print at 100% scale (actual size). Cards: 85x55mm, double-sided."
+echo "Print at 100% scale (actual size). Cards: 85x55mm, double-sided, long-edge flip."

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>VAMPIFY | A4 QR Card Test Sheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Urbanist:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f7f7f2;
+        --ink: #121212;
+        --mist: #4a4a44;
+        --neon-dim: #3d9a3d;
+        --line: rgba(18, 18, 18, 0.22);
+        --cut: rgba(18, 18, 18, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      body {
+        min-height: 100vh;
+        padding: 20px;
+        background: #2a2a2a;
+        color: var(--ink);
+        font-family: "Urbanist", system-ui, sans-serif;
+      }
+
+      .instructions {
+        width: 210mm;
+        margin: 0 auto 16px;
+        color: #fff;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .sheet {
+        width: 210mm;
+        height: 297mm;
+        margin: 0 auto 20px;
+        padding: 38.5mm 20mm;
+        display: grid;
+        grid-template-columns: repeat(2, 85mm);
+        grid-template-rows: repeat(4, 55mm);
+        background: #fff;
+        page-break-after: always;
+        break-after: page;
+      }
+
+      .sheet:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+
+      .card {
+        position: relative;
+        width: 85mm;
+        height: 55mm;
+        overflow: hidden;
+        background: var(--paper);
+        outline: 0.2mm dashed var(--cut);
+        outline-offset: -0.2mm;
+      }
+
+      .frame {
+        position: absolute;
+        inset: 3.5mm;
+        border: 1px solid var(--line);
+        pointer-events: none;
+      }
+
+      .inner {
+        position: absolute;
+        inset: 7mm;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logo {
+        width: 44mm;
+        height: 13mm;
+        display: block;
+        margin-bottom: 3mm;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .tagline {
+        max-width: 60mm;
+        color: var(--mist);
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .front-foot {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1mm;
+      }
+
+      .email {
+        color: var(--ink);
+        font-size: 9.5pt;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+      }
+
+      .site {
+        color: var(--mist);
+        font-size: 6.5pt;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .back .inner {
+        flex-direction: row;
+        align-items: center;
+        gap: 6mm;
+      }
+
+      .qr {
+        width: 30mm;
+        height: 30mm;
+        flex: none;
+      }
+
+      .back-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 2mm;
+      }
+
+      .label {
+        color: var(--neon-dim);
+        font-size: 6pt;
+        font-weight: 600;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+      }
+
+      .back-copy h2 {
+        font-size: 13pt;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        line-height: 1.1;
+      }
+
+      .back-copy p {
+        max-width: 36mm;
+        color: var(--mist);
+        font-size: 8pt;
+        line-height: 1.4;
+      }
+
+      .back-copy .site {
+        margin-top: 1mm;
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+
+      @media print {
+        body {
+          padding: 0;
+          background: none;
+        }
+
+        .instructions {
+          display: none;
+        }
+
+        .sheet {
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p class="instructions">
+      Page 1 contains eight fronts. Page 2 contains eight QR backs. Print
+      double-sided at 100% / actual size, flip on the long edge, then cut along
+      the dashed guides.
+    </p>
+
+    <main class="sheet fronts" aria-label="Card fronts"></main>
+    <main class="sheet backs" aria-label="Card backs"></main>
+
+    <template id="front-template">
+      <section class="card front">
+        <div class="frame"></div>
+        <div class="inner">
+          <img
+            class="logo"
+            src="assets/vampify-transparent.png"
+            alt="VAMPIFY"
+          />
+          <p class="tagline">Websites, refreshed for local businesses.</p>
+          <div class="front-foot">
+            <span class="email">discovery@vampify.co.uk</span>
+            <span class="site">vampify.co.uk · est. 2026</span>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <template id="back-template">
+      <section class="card back">
+        <div class="frame"></div>
+        <div class="inner">
+          <img
+            class="qr"
+            src="assets/qr-hi.svg"
+            alt="QR code for vampify.co.uk/hi"
+          />
+          <div class="back-copy">
+            <p class="label">Scan me</p>
+            <h2>See what I'd change.</h2>
+            <p>A 30-second look at how I'd refresh your site - free to ask.</p>
+            <span class="site">vampify.co.uk/hi</span>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <script>
+      const addCards = (sheetSelector, templateId) => {
+        const sheet = document.querySelector(sheetSelector);
+        const template = document.getElementById(templateId);
+
+        for (let index = 0; index < 8; index += 1) {
+          sheet.appendChild(template.content.cloneNode(true));
+        }
+      };
+
+      addCards(".fronts", "front-template");
+      addCards(".backs", "back-template");
+    </script>
+  </body>
+</html>
