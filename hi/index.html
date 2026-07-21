@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VAMPIFY — Let's refresh your website</title>
+    <meta
+      name="description"
+      content="A quick hello from VAMPIFY. Here's what I'd refresh on your website — and a founding offer for the first three local businesses."
+    />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content="#121212" />
+    <link
+      rel="icon"
+      href="/assets/vampify-small.jpg"
+      type="image/jpeg"
+      sizes="48x48"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Urbanist:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #121212;
+        --panel: #1a1a1a;
+        --wash: #152015;
+        --bone: #f7f7f2;
+        --mist: #c8c8c0;
+        --neon: #7fff7f;
+        --line: rgba(247, 247, 242, 0.22);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--ink);
+        scroll-padding-top: 1.5rem;
+      }
+
+      body {
+        background: var(--ink);
+        color: var(--bone);
+        font-family: "Urbanist", system-ui, sans-serif;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      .wrap {
+        max-width: 34rem;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem 3.5rem;
+      }
+
+      .glow {
+        background:
+          radial-gradient(
+            ellipse 90% 40% at 50% 0%,
+            rgba(127, 255, 127, 0.16),
+            transparent 70%
+          ),
+          var(--ink);
+      }
+
+      .label {
+        font-size: 0.65rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--neon);
+        font-weight: 600;
+      }
+
+      .logo {
+        width: 3rem;
+        height: 3rem;
+        object-fit: contain;
+        margin-bottom: 1.75rem;
+      }
+
+      h1 {
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.02;
+        font-size: clamp(2.25rem, 11vw, 3.25rem);
+        margin: 0.75rem 0 1.25rem;
+      }
+
+      .intro {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: 1.25rem;
+        color: var(--mist);
+        line-height: 1.4;
+      }
+
+      .changes {
+        margin: 2.75rem 0;
+        border: 1px solid var(--line);
+      }
+
+      .change {
+        padding: 1.25rem 1.35rem;
+        display: flex;
+        gap: 1rem;
+        align-items: baseline;
+      }
+
+      .change + .change {
+        border-top: 1px solid var(--line);
+      }
+
+      .change .n {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        color: var(--neon);
+        font-weight: 700;
+        min-width: 1.5rem;
+      }
+
+      .change h2 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 0.2rem;
+      }
+
+      .change p {
+        font-size: 0.9rem;
+        color: var(--mist);
+      }
+
+      .offer {
+        border: 1px solid var(--line);
+        box-shadow: inset 3px 0 0 0 var(--neon);
+        background: var(--wash);
+        padding: 1.5rem 1.5rem;
+        margin: 2.75rem 0;
+      }
+
+      .offer p {
+        font-size: 1rem;
+        color: var(--mist);
+        margin-top: 0.5rem;
+      }
+
+      .offer strong {
+        color: var(--bone);
+      }
+
+      .cta-wrap {
+        text-align: center;
+        margin-top: 3rem;
+      }
+
+      .email {
+        display: inline-block;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        font-size: clamp(1.35rem, 6.5vw, 1.9rem);
+        color: var(--bone);
+        text-decoration: none;
+        margin: 0.75rem 0 1.5rem;
+        word-break: break-word;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--neon);
+        color: var(--ink);
+        border: 1px solid var(--neon);
+        padding: 0.9rem 2rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 0.25s ease, color 0.25s ease;
+      }
+
+      .btn:hover,
+      .btn:focus-visible {
+        background: transparent;
+        color: var(--neon);
+        outline: none;
+      }
+
+      .foot {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.6rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--mist);
+      }
+
+      .foot a {
+        color: var(--mist);
+        text-decoration: none;
+      }
+
+      .foot a:hover {
+        color: var(--neon);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .btn {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="glow">
+    <main class="wrap">
+      <img class="logo" src="/assets/vampify-small-transparent-light.png" alt="VAMPIFY" />
+      <p class="label">Website refreshment studio · est. 2026</p>
+      <h1>Let's refresh your website.</h1>
+      <p class="intro">
+        Hi — I'm a 19-year-old student sharpening the websites of local
+        businesses. Thanks for scanning. Here's what I'd look at on yours.
+      </p>
+
+      <section class="changes" aria-label="What I'd refresh">
+        <div class="change">
+          <span class="n">01</span>
+          <div>
+            <h2>A modern face</h2>
+            <p>A clean, current look that fits your brand — on every screen.</p>
+          </div>
+        </div>
+        <div class="change">
+          <span class="n">02</span>
+          <div>
+            <h2>Faster everything</h2>
+            <p>Pages that load instantly, so visitors never give up waiting.</p>
+          </div>
+        </div>
+        <div class="change">
+          <span class="n">03</span>
+          <div>
+            <h2>Clearer paths</h2>
+            <p>Simple routes for customers to find you, trust you, and get in touch.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="offer">
+        <p class="label">The founding offer</p>
+        <p>
+          The <strong>first three businesses</strong> get their refresh
+          <strong>free</strong> — in exchange for an honest testimonial. Local
+          or global, big or small.
+        </p>
+      </div>
+
+      <div class="cta-wrap">
+        <p class="label">Start with one simple change</p>
+        <a class="email" href="mailto:discovery@vampify.co.uk"
+          >discovery@vampify.co.uk</a
+        >
+        <br />
+        <a class="btn" href="mailto:discovery@vampify.co.uk">Get in touch</a>
+      </div>
+
+      <div class="foot">
+        <span>© 2026 VAMPIFY</span>
+        <a href="/">vampify.co.uk</a>
+      </div>
+    </main>
+  </body>
+</html>

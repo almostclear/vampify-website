@@ -5,4 +5,7 @@ wrangler.jsonc
 *.md
 leaflet-palette.html
 leaflet.pdf
-export-leaflet-pdf.sh
+card.html
+card.pdf
+export-pdf.sh
+assets/qr-hi.svg
