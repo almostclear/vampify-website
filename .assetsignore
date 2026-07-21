@@ -4,3 +4,5 @@ README.md
 wrangler.jsonc
 *.md
 leaflet-palette.html
+leaflet.pdf
+export-leaflet-pdf.sh

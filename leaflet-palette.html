@@ -12,17 +12,16 @@
       rel="stylesheet"
     />
     <style>
-      /* VAMPIFY leaflet — A5 double-sided, printed straight from this file.
-         Print: File > Print > A5, no margins, double-sided (flip on long edge),
-         and enable "Background graphics". */
+      /* VAMPIFY leaflet — A5 double-sided.
+         Best quality: run scripts/export-leaflet-pdf.sh and print the PDF.
+         Manual: File > Print > A5, margins none, background graphics on,
+         flip on long edge. */
 
       :root {
         --paper: #f7f7f2;
-        --panel: #edede6;
-        --wash: #e6f0e6;
+        --wash: #eaf3ea; /* solid — prints clean, no transparency */
         --ink: #121212;
         --mist: #4a4a44;
-        --neon: #7fff7f;
         --neon-dim: #3d9a3d;
         --line: rgba(18, 18, 18, 0.22);
       }
@@ -62,12 +61,13 @@
         flex: none;
       }
 
+      /* Single soft glow per side — the only gradient, kept large and smooth */
       .page-front {
         background:
           radial-gradient(
             ellipse 130% 55% at 50% 108%,
-            rgba(127, 255, 127, 0.45),
-            rgba(127, 255, 127, 0.18) 45%,
+            rgba(127, 255, 127, 0.4),
+            rgba(127, 255, 127, 0.14) 45%,
             transparent 75%
           ),
           var(--paper);
@@ -77,8 +77,8 @@
         background:
           radial-gradient(
             ellipse 130% 55% at 50% -8%,
-            rgba(127, 255, 127, 0.45),
-            rgba(127, 255, 127, 0.18) 45%,
+            rgba(127, 255, 127, 0.4),
+            rgba(127, 255, 127, 0.14) 45%,
             transparent 75%
           ),
           var(--paper);
@@ -86,14 +86,29 @@
 
       .inner-frame {
         position: absolute;
-        inset: 6mm;
+        inset: 7mm;
         border: 1px solid var(--line);
         pointer-events: none;
       }
 
+      /* Caption row sits in the margin BELOW the frame */
+      .below-frame {
+        position: absolute;
+        left: 9mm;
+        right: 9mm;
+        bottom: 2.2mm;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 6.5pt;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--mist);
+      }
+
       .content {
         position: absolute;
-        inset: 11mm;
+        inset: 15mm;
         display: flex;
         flex-direction: column;
       }
@@ -117,31 +132,32 @@
 
       /* Square source canvas: crop to the central wordmark strip */
       .front-logo {
-        width: 52mm;
-        height: 17mm;
+        width: 50mm;
+        height: 16mm;
         object-fit: cover;
-        margin: 0 auto 2mm;
+        margin: 0 auto 4mm;
         display: block;
       }
 
       .front-head {
         text-align: center;
-        margin-bottom: 6mm;
+        margin-top: 2mm;
+        margin-bottom: 9mm;
       }
 
       .front-head h1 {
-        font-size: 24pt;
+        font-size: 22pt;
         font-weight: 800;
         letter-spacing: -0.02em;
-        line-height: 1.02;
-        margin: 2.5mm 0 2.5mm;
+        line-height: 1.05;
+        margin: 3mm 0 4mm;
       }
 
-      .front-head p {
-        font-size: 10.5pt;
-        line-height: 1.35;
+      .front-head p.editorial {
+        font-size: 10pt;
+        line-height: 1.45;
         font-style: italic;
-        max-width: 92mm;
+        max-width: 86mm;
         margin: 0 auto;
       }
 
@@ -152,11 +168,10 @@
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         border: 1px solid var(--line);
-        background: rgba(247, 247, 242, 0.55);
       }
 
       .box {
-        padding: 5mm;
+        padding: 6mm;
         display: flex;
         flex-direction: column;
         gap: 2.5mm;
@@ -176,21 +191,21 @@
       }
 
       .box h2 {
-        font-size: 12pt;
+        font-size: 11.5pt;
         font-weight: 700;
         letter-spacing: -0.01em;
       }
 
       .box p {
         font-size: 8.5pt;
-        line-height: 1.45;
+        line-height: 1.5;
         color: var(--mist);
       }
 
-      /* handwriting box */
+      /* handwriting box — solid fill + vector border, no shadows */
       .box-write {
-        background: rgba(230, 240, 230, 0.65);
-        box-shadow: inset 2px 0 0 0 var(--neon-dim);
+        background: var(--wash);
+        border-left: 2px solid var(--neon-dim) !important;
       }
 
       .write-lines {
@@ -205,39 +220,25 @@
         border-bottom: 1px solid var(--line);
       }
 
-      .front-foot {
-        margin-top: 4mm;
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        font-size: 8pt;
-      }
-
-      .front-foot .site {
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-      }
-
       /* ---------- back ---------- */
 
       .back-head {
-        margin-top: 4mm;
+        margin-top: 6mm;
       }
 
       .back-head h1 {
-        font-size: 27pt;
+        font-size: 25pt;
         font-weight: 800;
         letter-spacing: -0.02em;
-        line-height: 1.0;
-        margin: 3mm 0 4mm;
+        line-height: 1.05;
+        margin: 3mm 0 6mm;
         max-width: 100mm;
       }
 
       .back-copy {
         font-size: 10.5pt;
-        line-height: 1.5;
-        max-width: 104mm;
+        line-height: 1.6;
+        max-width: 100mm;
         color: var(--mist);
       }
 
@@ -246,60 +247,43 @@
       }
 
       .offer {
-        margin-top: 7mm;
+        margin-top: 12mm;
         border: 1px solid var(--line);
-        background: rgba(230, 240, 230, 0.65);
-        box-shadow: inset 2px 0 0 0 var(--neon-dim);
-        padding: 5mm 6mm;
+        border-left: 2px solid var(--neon-dim);
+        background: var(--wash);
+        padding: 6mm 7mm;
       }
 
       .offer p {
         font-size: 10pt;
-        line-height: 1.45;
-        margin-top: 2mm;
+        line-height: 1.5;
+        margin-top: 2.5mm;
+        color: var(--mist);
+      }
+
+      .offer p strong {
+        color: var(--ink);
       }
 
       .contact {
         margin-top: auto;
+        margin-bottom: 8mm;
         text-align: center;
-        padding-bottom: 2mm;
       }
 
       .contact .email {
         display: block;
-        font-size: 17pt;
+        font-size: 16pt;
         font-weight: 800;
         letter-spacing: -0.01em;
         color: var(--ink);
         text-decoration: none;
-        margin: 3mm 0 2mm;
+        margin: 3.5mm 0;
       }
 
       .contact .site {
-        font-size: 9pt;
+        font-size: 8.5pt;
         letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--mist);
-      }
-
-      .back-foot {
-        margin-top: 7mm;
-        padding-top: 4mm;
-        border-top: 1px solid var(--line);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .back-foot img {
-        width: 10mm;
-        height: 10mm;
-        object-fit: contain;
-      }
-
-      .back-foot span {
-        font-size: 7.5pt;
-        letter-spacing: 0.28em;
         text-transform: uppercase;
         color: var(--mist);
       }
@@ -345,9 +329,8 @@
           <p class="label">Website refreshment studio</p>
           <h1>Your website,<br />brought up to speed.</h1>
           <p class="editorial">
-            Hi — I’m a 19-year-old student on a mission to sharpen the tech of
-            local businesses. I took a look at your website, and here’s what
-            VAMPIFY would refresh.
+            Hi — I’m a 19-year-old student sharpening the websites of local
+            businesses. Here’s what I’d refresh on yours.
           </p>
         </div>
 
@@ -355,26 +338,17 @@
           <div class="box">
             <p class="label">01 — Design</p>
             <h2>A modern face</h2>
-            <p>
-              A clean, current design that fits your brand and makes the right
-              first impression — on every screen, especially phones.
-            </p>
+            <p>A clean, current look that fits your brand — on every screen.</p>
           </div>
           <div class="box">
             <p class="label">02 — Speed</p>
             <h2>Faster everything</h2>
-            <p>
-              Pages that load instantly. Slow sites lose visitors before they
-              even see what you offer — we make sure yours never does.
-            </p>
+            <p>Pages that load instantly, so visitors never give up waiting.</p>
           </div>
           <div class="box">
             <p class="label">03 — Customers</p>
             <h2>Clearer paths</h2>
-            <p>
-              Obvious ways for customers to find you, trust you, and contact
-              you — so the site actually brings business in.
-            </p>
+            <p>Simple routes to find you, trust you, and get in touch.</p>
           </div>
           <div class="box box-write">
             <p class="label">04 — Just for you</p>
@@ -382,15 +356,13 @@
               <span></span>
               <span></span>
               <span></span>
-              <span></span>
             </div>
           </div>
         </div>
-
-        <div class="front-foot">
-          <span class="label">est. 2026</span>
-          <span class="site">vampify.co.uk</span>
-        </div>
+      </div>
+      <div class="below-frame">
+        <span>est. 2026</span>
+        <span>vampify.co.uk</span>
       </div>
     </section>
 
@@ -400,24 +372,20 @@
       <div class="content">
         <div class="back-head">
           <p class="label">An open invitation</p>
-          <h1>Start small. Or start big.</h1>
+          <h1>Start small.<br />Or start big.</h1>
           <p class="back-copy">
-            A refresh doesn’t have to mean rebuilding everything. It can start
-            with <strong>one simple change</strong> — a faster homepage, a
-            cleaner menu, a contact button that actually gets pressed. Tell me
-            what bugs you about your website, or ask what I’d do with it.
-            <strong>The first conversation is free, friendly, and
-            obligation-free.</strong>
+            A refresh can begin with <strong>one simple change</strong> — a
+            faster homepage, a cleaner menu, a button that actually gets
+            pressed. Tell me what bugs you about your site, or ask what I’d do
+            with it.
           </p>
         </div>
 
         <div class="offer">
           <p class="label">The founding offer</p>
           <p>
-            I’m building VAMPIFY’s first portfolio — so the
-            <strong>first three businesses</strong> get their refresh
-            <strong>free</strong>, in exchange for an honest testimonial.
-            Local or global, big or small.
+            The <strong>first three businesses</strong> get their refresh
+            <strong>free</strong> — in exchange for an honest testimonial.
           </p>
         </div>
 
@@ -428,11 +396,10 @@
           >
           <p class="site">vampify.co.uk</p>
         </div>
-
-        <div class="back-foot">
-          <img src="assets/vampify-small-transparent.png" alt="" />
-          <span>© 2026 VAMPIFY — Websites, rebuilt.</span>
-        </div>
+      </div>
+      <div class="below-frame">
+        <span>© 2026 VAMPIFY</span>
+        <span>Websites, rebuilt.</span>
       </div>
     </section>
   </body>
