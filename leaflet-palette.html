@@ -6,16 +6,16 @@
     <meta name="robots" content="noindex" />
     <title>Palette</title>
     <style>
-      /* VAMPIFY brand tokens — identical to index.html */
+      /* VAMPIFY brand tokens — light mode inversion for print */
       :root {
-        --ink: #121212;
-        --panel: #1a1a1a;
-        --wash: #152015;
-        --bone: #f7f7f2;
-        --mist: #c8c8c0;
+        --paper: #f7f7f2; /* bone, now the canvas */
+        --panel: #edede6;
+        --wash: #e6f0e6; /* light green wash */
+        --ink: #121212; /* now the accent/shape color */
+        --mist: #4a4a44; /* mid tone on light */
         --neon: #7fff7f;
-        --neon-dim: #3d9a3d;
-        --line: rgba(247, 247, 242, 0.22);
+        --neon-dim: #3d9a3d; /* better contrast green for print */
+        --line: rgba(18, 18, 18, 0.22);
       }
 
       * {
@@ -25,7 +25,7 @@
       }
 
       body {
-        background: var(--ink);
+        background: var(--paper);
       }
 
       section {
@@ -33,20 +33,20 @@
         position: relative;
       }
 
-      /* 1. Hero glow — the main dark canvas with neon radiance */
+      /* 1. Hero canvas — light paper with soft green radiance */
       .glow {
         background:
           radial-gradient(
             ellipse 70% 55% at 12% 88%,
-            rgba(127, 255, 127, 0.16),
+            rgba(127, 255, 127, 0.28),
             transparent 60%
           ),
           radial-gradient(
             ellipse 45% 40% at 92% 18%,
-            rgba(127, 255, 127, 0.06),
+            rgba(127, 255, 127, 0.12),
             transparent 55%
           ),
-          var(--ink);
+          var(--paper);
       }
 
       .frame {
@@ -63,7 +63,7 @@
         width: 3.5rem;
         height: 3.5rem;
         border-radius: 50%;
-        background: var(--neon);
+        background: var(--neon-dim);
       }
 
       .bar {
@@ -72,7 +72,7 @@
         left: 8%;
         width: 14rem;
         height: 3.25rem;
-        background: var(--neon);
+        background: var(--ink);
       }
 
       .rule-v {
@@ -83,7 +83,7 @@
         background: var(--line);
       }
 
-      /* 2. Swatch strip — flat brand colors edge to edge */
+      /* 2. Swatch strip — flat light-mode brand colors edge to edge */
       .swatches {
         display: grid;
         grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
@@ -94,14 +94,14 @@
         border-right: 1px solid var(--line);
       }
 
-      .c-ink { background: var(--ink); }
-      .c-panel { background: var(--panel); }
-      .c-wash { background: var(--wash); }
-      .c-neon-dim { background: var(--neon-dim); }
-      .c-neon { background: var(--neon); }
-      .c-bone { background: var(--bone); }
+      .c-paper { background: #f7f7f2; }
+      .c-panel { background: #edede6; }
+      .c-wash { background: #e6f0e6; }
+      .c-neon { background: #7fff7f; }
+      .c-neon-dim { background: #3d9a3d; }
+      .c-ink { background: #121212; }
 
-      /* 3. Panel grid — the three-column bordered layout feel */
+      /* 3. Panel grid — bordered layout rhythm on light */
       .grid3 {
         min-height: 60vh;
         display: grid;
@@ -120,7 +120,7 @@
       }
 
       .accent-left {
-        box-shadow: inset 3px 0 0 0 var(--neon);
+        box-shadow: inset 3px 0 0 0 var(--neon-dim);
       }
 
       .tick {
@@ -129,23 +129,23 @@
         left: 2.5rem;
         width: 2.5rem;
         height: 1px;
-        background: var(--neon);
+        background: var(--neon-dim);
       }
 
-      /* 4. Contact glow — green wash rising from the bottom */
+      .p-paper { background: #f7f7f2; }
+      .p-panel { background: #edede6; }
+      .p-wash { background: #e6f0e6; }
+
+      /* 4. Footer wash — green rising glow on light paper */
       .contact {
         min-height: 70vh;
         background:
           radial-gradient(
             ellipse 60% 70% at 50% 100%,
-            rgba(127, 255, 127, 0.14),
+            rgba(127, 255, 127, 0.3),
             transparent 55%
           ),
-          var(--wash);
-      }
-
-      .contact .frame {
-        inset: 1.25rem;
+          #edf4ed;
       }
 
       .center-rule {
@@ -155,12 +155,12 @@
         transform: translateX(-50%);
         width: 4rem;
         height: 1px;
-        background: var(--neon);
+        background: var(--neon-dim);
       }
     </style>
   </head>
   <body>
-    <!-- Crop 1: hero canvas — dark + neon glow + blueprint frame -->
+    <!-- Crop 1: light hero — paper + soft green glow + blueprint frame -->
     <section class="glow">
       <div class="frame"></div>
       <div class="rule-v" style="left: 33%"></div>
@@ -169,24 +169,24 @@
       <div class="bar"></div>
     </section>
 
-    <!-- Crop 2: flat swatch strip (ink / panel / wash / dim green / neon / bone) -->
+    <!-- Crop 2: flat swatch strip (paper / panel / wash / neon / print green / ink) -->
     <section class="swatches">
-      <div class="c-ink"></div>
+      <div class="c-paper"></div>
       <div class="c-panel"></div>
       <div class="c-wash"></div>
-      <div class="c-neon-dim"></div>
       <div class="c-neon"></div>
-      <div class="c-bone"></div>
+      <div class="c-neon-dim"></div>
+      <div class="c-ink"></div>
     </section>
 
     <!-- Crop 3: bordered panel rhythm with green accent column -->
     <section class="grid3">
-      <div class="c-ink"><span class="tick"></span></div>
-      <div class="c-wash accent-left"></div>
-      <div class="c-panel"><span class="tick"></span></div>
+      <div class="p-paper"><span class="tick"></span></div>
+      <div class="p-wash accent-left"></div>
+      <div class="p-panel"><span class="tick"></span></div>
     </section>
 
-    <!-- Crop 4: contact wash — green rising glow -->
+    <!-- Crop 4: footer wash — green glow rising from the bottom edge -->
     <section class="contact">
       <div class="frame"></div>
       <div class="center-rule"></div>
