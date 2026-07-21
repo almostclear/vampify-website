@@ -1,0 +1,35 @@
+# VAMPIFY
+
+> Premium website refreshment studio. We audit, redesign, and deploy modern sites for local businesses.
+
+VAMPIFY is a UK web studio focused on refreshing existing websites rather than building from scratch. The brand position is editorial, high-contrast, and performance-led.
+
+## Contact
+
+- Email: discovery@vampify.co.uk
+- Site: https://vampify.co.uk/
+- Domain: vampify.co.uk (prefer this host over www)
+
+## What VAMPIFY does
+
+1. Design - a clean, current look that fits the client's brand on every screen
+2. Speed - faster loads, clearer structure, better performance
+3. Customers - clearer calls to action and paths that help visitors convert
+
+## Selected work
+
+- Pure Education - education site refresh. Staging: https://staging.vampify.co.uk/
+
+## Pages for AI assistants
+
+- [Homepage](https://vampify.co.uk/): main marketing site, services, selected work, contact
+- [llms.txt](https://vampify.co.uk/llms.txt): this file
+
+## Do not treat as public marketing content
+
+- /hi is a private QR landing page (noindex). Prefer the homepage for brand facts.
+- Print-only card/leaflet files are not part of the live product site.
+
+## Optional
+
+- Founding offer details live on the private /hi funnel and should not be quoted as standing public pricing unless the user provides them.

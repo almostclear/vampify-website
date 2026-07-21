@@ -1,4 +1,52 @@
+# VAMPIFY crawl policy
+# robots.txt is a request, not a security wall. Secrets must never live
+# on this static site. Public marketing pages are fine to scrape.
+
 User-agent: *
 Allow: /
+Disallow: /hi
 
 Sitemap: https://vampify.co.uk/sitemap.xml
+
+# --- AI / LLM crawlers ---
+# Allow the public site so assistants can cite VAMPIFY accurately.
+# Keep /hi out of training indexes (QR funnel / founding offer).
+
+User-agent: GPTBot
+Allow: /
+Disallow: /hi
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /hi
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /hi
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /hi
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /hi
+
+User-agent: Claude-User
+Allow: /
+Allow: /hi
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /hi
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /hi
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /hi
+
+User-agent: Bytespider
+Disallow: /
