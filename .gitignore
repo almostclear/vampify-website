@@ -1,4 +1,21 @@
+# Local environments
 .venv/
-leaflet.pdf
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Print & marketing collateral (local only - not part of the live site)
+card.html
+card-sheet.html
 card.pdf
 card-sheet.pdf
+leaflet-palette.html
+leaflet.pdf
+export-pdf.sh
+assets/qr-hi.svg
+vampify-print/
+*.pdf
