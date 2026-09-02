@@ -18,7 +18,7 @@ VAMPIFY is a UK web studio focused on refreshing existing websites rather than b
 
 ## Selected work
 
-- Pure Education - education site refresh. Staging: https://staging.vampify.co.uk/
+- Pure Education - education site refresh. Live: https://pureeducation.co.uk/
 
 ## Pages for AI assistants
 
